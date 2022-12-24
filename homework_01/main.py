@@ -13,7 +13,7 @@ ODD = "odd"
 EVEN = "even"
 PRIME = "prime"
 
-def prime_test(number):                    #Функция, проверяющая простое число или нет
+def is_prime(number):                      #Функция, проверяющая простое число или нет
     k = 2                                  #Счетчик делениий
     if number <= 1:                        #Исключаем все значения <=1, которые не являются простыми числами
         return False
@@ -25,10 +25,22 @@ def prime_test(number):                    #Функция, проверяюща
         else:
             return False                   #Деление без остатка произошло раньше, чем кол-во делений дошло до значения числа
 
-def filter_numbers(number, filter):
-    if filter == 'odd':
-        return [i for i in number if i%2 != 0]
-    elif filter == 'even':
-        return [i for i in number if i%2 == 0]
+
+#До того, как прочитал про реализацию через filter()
+#----------------------------------------------------------
+# def filter_numbers(number, filter_type):
+#     if filter_type == ODD:
+#         return [i for i in number if i%2 != 0]
+#     elif filter_type == EVEN:
+#         return [i for i in number if i%2 == 0]
+#     else:
+#         return [i for i in number if is_prime(i)]
+#----------------------------------------------------------
+
+def filter_numbers(number, filter_type):
+    if filter_type == ODD:
+        return list(filter(lambda x: x%2 != 0, number))
+    elif filter_type == EVEN:
+        return list(filter(lambda x: x%2 == 0, number))
     else:
-        return [i for i in number if prime_test(i) == True]
+        return list(filter(lambda x: is_prime(x), number))
